@@ -1,4 +1,4 @@
-require_relative "migration"
+require_relative "questionsdb"
 require_relative "reply"
 
 class Question

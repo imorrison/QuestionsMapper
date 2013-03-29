@@ -1,4 +1,4 @@
-require_relative 'migration'
+require_relative 'questionsdb'
 require_relative 'question'
 require_relative 'reply'
 
@@ -58,7 +58,7 @@ class User
     QuestionsDB.instance.execute(query, fname, lname, is_instructor, id)
   end
 
-  def questions
+  def asked_questions
     query = <<-SQL
     SELECT id
     FROM questions

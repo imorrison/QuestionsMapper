@@ -1,4 +1,4 @@
-require_relative "migration"
+require_relative "questionsdb"
 
 class Reply
   def self.find(id)
