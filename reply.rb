@@ -11,6 +11,32 @@ class Reply
     Reply.new(QuestionsDB.instance.execute(query, id).first)
   end
 
+  def self.find_by_question_id(question_id)
+    query = <<-SQL
+    SELECT *
+    FROM replies
+    WHERE question_id = ?
+    SQL
+
+    QuestionsDB.instance.execute(query, question_id).map do |reply|
+      Reply.new(reply)
+    end
+  end
+
+  # find by parent id
+
+  def self.find_by_author(author_id)
+    query = <<-SQL
+    SELECT *
+    FROM replies
+    WHERE author_id = ?
+    SQL
+
+    QuestionsDB.instance.execute(query, author_id).map do |reply|
+      Reply.new(reply)
+    end
+  end
+
   def self.most_replied
     query = <<-SQL
     SELECT a.*
@@ -42,4 +68,12 @@ class Reply
       Reply.new(reply)
     end
   end
+
+  # question
+
+  # parent reply
+
+  # child replies
+
+  # author
 end
