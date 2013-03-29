@@ -1,4 +1,4 @@
-require_relative "migration"
+require_relative "questionsdb"
 require_relative "reply"
 
 class Question
@@ -25,8 +25,16 @@ class Question
     questions.length > 1 ? questions : questions.first
   end
 
-  def self.questions_by_author(author)
-    # not yet implemented 
+  def self.find_by_author(author_id)
+    query = <<-SQL
+    SELECT *
+    FROM questions
+    WHERE author_id = ?;
+    SQL
+
+    questions = QuestionsDB.instance.execute(query, author_id).map do |question|
+       Question.new(question)
+    end
   end
 
   def self.most_liked(n)
@@ -129,6 +137,18 @@ class Question
       Reply.new(reply)
     end
   end
+
+  def author
+    User.find(author_id)
+  end
+
+  # followers
+
+  def replies
+    Reply.find_by_question_id(id)
+  end
+
+  # num_likes
 end
 
 

@@ -1,8 +1,18 @@
+require_relative "questionsdb"
 class QuestionLike
-  attr_reader :id, :question, :user
-  def initialize(opitons = {})
-    @id = options['id']
-    @question = options['question_id']
-    @user = options['user_id']
+  def self.likes_per_question(questions_id)
+
+  end
+
+  def self.num_likes_per_question_id(questions_id)
+
+  end
+
+  def self.liked_questions_for_user_id(user_id)
+
+  end
+
+  def self.most_liked_questions(n)
+
   end
 end

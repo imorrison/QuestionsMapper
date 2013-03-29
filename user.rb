@@ -1,4 +1,4 @@
-require_relative 'migration'
+require_relative "questionsdb"
 require_relative 'question'
 require_relative 'reply'
 
@@ -59,27 +59,13 @@ class User
   end
 
   def questions
-    query = <<-SQL
-    SELECT id
-    FROM questions
-    WHERE author_id = ?
-    SQL
-
-    QuestionsDB.instance.execute(query, id).map do |question|
-      Question.find(question['id'])
-    end
+    Question.find_by_author(id)
   end
+  
+  # followed questions
 
   def replies
-    query = <<-SQL
-    SELECT replies.id
-    FROM replies JOIN questions ON (replies.question_id = questions.id)
-    WHERE questions.author_id = ?
-    SQL
-
-    QuestionsDB.instance.execute(query, id).map do |reply|
-      Reply.find(reply['id'])
-    end
+    Reply.find_by_author(id)
   end
 
   def average_karma
