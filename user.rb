@@ -36,7 +36,7 @@ class User
     @is_instructor = options['is_instructor']
   end
 
-  def save
+  def create
     if id.nil?
       query = <<-SQL
       INSERT INTO users ('fname', 'lname', 'is_instructor')
@@ -45,13 +45,17 @@ class User
       QuestionsDB.instance.execute(query, fname, lname, is_instructor)
       @id = QuestionsDB.instance.last_insert_row_id
     else
-      query = <<-SQL
+      update
+    end
+  end
+
+  def update
+    query = <<-SQL
       UPDATE users
       SET fname = ?, lname = ?, is_instructor = ?
       WHERE id = ?
       SQL
-      QuestionsDB.instance.execute(query, fname, lname, is_instructor, id)
-    end
+    QuestionsDB.instance.execute(query, fname, lname, is_instructor, id)
   end
 
   def questions

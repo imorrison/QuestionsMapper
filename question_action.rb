@@ -1,6 +1,9 @@
 class QuestionAction
-  attr_reader :type, :question, :time
-  def initialize(type, question, time)
-    @type, @question, @time = type, question, time
+  attr_reader :id, :type, :question, :time
+  def initialize(options = {})
+    @id = options['id']
+    @type = options['type']
+    @question = options['questions_id']
+    @time = options['time_stamp'] 
   end
 end

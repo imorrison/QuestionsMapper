@@ -26,6 +26,7 @@ class Question
   end
 
   def self.questions_by_author(author)
+    # not yet implemented 
   end
 
   def self.most_liked(n)
@@ -66,6 +67,28 @@ class Question
     @title = options['title']
     @body = options['body']
     @author = options['author_id']
+  end
+
+  def create
+    if id.nil?
+      query = <<-SQL
+        INSERT INTO questions ('title', 'body', 'author_id')
+        VALUES (?, ?, ?)
+      SQL
+      QuestionsDB.instance.execute(query, title, body, author)
+      @id = QuestionsDB.instance.last_inserted_row_id
+    else
+      update
+    end
+  end
+
+  def update
+    query = <<-SQL
+      UPDATE questions
+      SET  title = ?, body = ?, author_id = ?
+      WHERE id = ?
+    SQL
+    QuestionsDB.instance.execute(query, title, body, author_id)
   end
 
   def num_likes
