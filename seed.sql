@@ -19,7 +19,7 @@ VALUES  (1, 3),
         (2, 6),
         (1, 4);
 
-INSERT INTO replies ('question_id', 'parent_id', 'body, author_id')
+INSERT INTO replies ('question_id', 'parent_id', 'body', 'author_id')
 VALUES  (1, NULL, 'Perhaps Jackie Treehorn', 3),
         (2, NULL, 'Not so good', 6),
         (1, 1,    'Not me!', 7);
