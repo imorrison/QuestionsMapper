@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 require_relative 'questionsdb'
-=======
-require_relative "questionsdb"
->>>>>>> cdea6bb64f9890389b7d56f1252496a5c409da3d
 require_relative 'question'
 require_relative 'reply'
 
@@ -62,21 +58,8 @@ class User
     QuestionsDB.instance.execute(query, fname, lname, is_instructor, id)
   end
 
-<<<<<<< HEAD
-  def asked_questions
-    query = <<-SQL
-    SELECT id
-    FROM questions
-    WHERE author_id = ?
-    SQL
-
-    QuestionsDB.instance.execute(query, id).map do |question|
-      Question.find(question['id'])
-    end
-=======
   def questions
     Question.find_by_author(id)
->>>>>>> cdea6bb64f9890389b7d56f1252496a5c409da3d
   end
   
   # followed questions
